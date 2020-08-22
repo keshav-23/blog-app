@@ -1,0 +1,49 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{user.profile.image.url}}">
+            <div class="media-body">
+                <h2 class="account-heading">{{ user.username}}</h2>
+                <p class="text-secondary">{{ user.email }}</p>
+            </div>
+        </div>
+
+        
+        <div class="content-section">
+            <legend class="border-bottom mb=2" style="color:rgb(48, 45, 45)">{{ user.username }} </legend>
+            <a href="{% url 'edit_profile' %}" class="btn btn-outline-info btn-sm" role="button">Edit Profile</a>
+        </div>
+    </div>
+        <h2 class="text-muted mb-8"> My Blogs</h2>
+        <div class="mt-8 mb-4">
+            {% for post in posts%}
+                {% if post.author == user %}
+                    <article class="media content-section">
+                    <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+                        <div class="media-body">
+                        <div class="article-metadata">
+                            <h4 class="mr-2" >{{ post.author }}
+                            <small class="text-muted" style="float: inline-end;">{{ post.date_created|date:"F d, Y" }}</small></h4>
+                            
+                            <div>                                                                        
+                                <h3 class="article-title">{{ post.title }}
+                                <a class="btn btn-secondary btn-sm mt-1 mb-1 mr-1 ml-4" href="{% url 'post-update' post.id %}">Update</a>
+                                <a class="btn btn-danger btn-sm mt-1 mb-1 mr-1" href="{% url 'post-delete' post.id %}">Delete</a></h3>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="article-content">{{ post.content }}</p>
+                        </div>
+                        </div>
+                    </article>
+
+            {% endif %}
+        {% endfor%}
+        </div>       
+
+    
+    
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    
+    <div class="border-top pt-3">
+        <h2>You have been successfully logged out :)</h2>
+        <div class="ml-2">
+            <a class="btn btn-primary btn-sm mb-1 mt-1" href="{% url 'login' %}">Sign In</a>
+            <a class="btn btn-outline-primary btn-sm mb-1 mt-1" href="{% url 'register' %}">Register</a>
+        </div>
+    </div>
+
+    
+    
+{% endblock content %}
